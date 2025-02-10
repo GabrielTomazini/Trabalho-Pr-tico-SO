@@ -157,7 +157,7 @@ void process_address(uint32_t address, int policy)
     }
 
     uint32_t physical_address = (frame_number << 12) | offset;
-    printf("Logical Address: 0x%08X -> Physical Address: 0x%08X\n", address, physical_address);
+    printf("Endereço Lógico: 0x%08X -> Endereço Físico: 0x%08X\n", address, physical_address);
 }
 
 void read_trace_file(const char *filename, int policy)
@@ -165,7 +165,7 @@ void read_trace_file(const char *filename, int policy)
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        perror("Error opening file");
+        perror("Erro na abertura do arquivo!");
         exit(1);
     }
     uint32_t address;
@@ -184,12 +184,12 @@ int main(int argc, char *argv[])
 
     if (argc != 3)
     {
-        printf("Usage: %s <trace file> <policy (0 = LRU, 1 = Second Chance)>\n", argv[0]);
+        printf("Uso correto: %s <nome do arquivo de trace> <política (0 = LRU, 1 = Segunda chance)>\n", argv[0]);
         return 1;
     }
     if (policy != 0 && policy != 1)
     {
-        printf("Invalid policy. Use 0 for LRU or 1 for Second Chance.\n");
+        printf("Política inválida! Use 0 para LRU ou 1 para Segunda Chance.\n");
         return 1;
     }
 
@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
     read_trace_file(argv[1], policy);
 
     if (policy)
-        printf("\nMetodo utilizado: Second Chance\n");
+        printf("\nMetodo utilizado: Segunda Chance\n");
     else
         printf("\nMetodo utilizado: LRU\n");
 
